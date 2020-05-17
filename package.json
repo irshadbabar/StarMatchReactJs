@@ -1,5 +1,6 @@
 {
   "name": "mygame",
+  "homepage": "file:///E:/Run/React_Learning/mygame/build/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
