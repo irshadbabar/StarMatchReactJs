@@ -17,9 +17,8 @@ const StarMatch = (props) => {
     return new Array(9).fill(colors.available);
   });
   const [timer, setTimer] = useState(props.timeout);
-  const [gameStatus,setGameStatus] = useState("active");
+  const [gameStatus, setGameStatus] = useState("active");
 
- 
   const handler = (value, backgroundColor) => {
     let newArr = [];
 
@@ -117,40 +116,29 @@ const StarMatch = (props) => {
     setNumberOfStars(utils.random(1, 9));
   };
 
-
-  const concludeGame = (timer) =>{
-
-    if(timer >= 0 && allUsed(currentNumberDetails) === true){
+  const concludeGame = (timer) => {
+    if (timer >= 0 && allUsed(currentNumberDetails) === true) {
       props.stopCount(props.intervalId);
       setGameStatus("win");
       setNumberOfStars(0);
-      
-    }
-    else if(timer > 0){
-        //do nothing as game is in active state
-    }
-    else if(timer <=0 ){
+    } else if (timer > 0) {
+      //do nothing as game is in active state
+    } else if (timer <= 0) {
       props.stopCount(props.intervalId);
       setGameStatus("lose");
       setNumberOfStars(0);
-      
     }
-  }
+  };
 
-
-  if(timer !== props.timeout){
+  if (timer !== props.timeout) {
     setTimer(props.timeout);
     concludeGame(props.timeout);
-    
-    
   }
-  const onClick = () =>{
+  const onClick = () => {
     resetStates();
     setGameStatus("active");
     props.resetCount();
-  }
-
-
+  };
 
   return (
     <div className="game">
@@ -159,17 +147,37 @@ const StarMatch = (props) => {
       </div>
       <div className="body">
         <div className="left">
-          
-        {gameStatus === "lose"? <div className="game-done" > <span style={redColor} className="message">You have lost game</span><button style={{color:"green"}} className="message" onClick={() =>onClick()}>Try Again</button></div> 
-                              :gameStatus === "win"?<div className="game-done"> <span className="message" style={greenColor}>You have won game</span><button className="message" onClick={() => onClick()}>Play Again</button></div>
-                              :""}
+          {gameStatus === "lose" ? (
+            <div className="game-done">
+              {" "}
+              <span style={redColor} className="message">
+                You have lost game
+              </span>
+              <button
+                style={{ color: "green" }}
+                className="message"
+                onClick={() => onClick()}
+              >
+                Try Again
+              </button>
+            </div>
+          ) : gameStatus === "win" ? (
+            <div className="game-done">
+              {" "}
+              <span className="message" style={greenColor}>
+                You have won game
+              </span>
+              <button className="message" onClick={() => onClick()}>
+                Play Again
+              </button>
+            </div>
+          ) : (
+                ""
+              )}
 
           {utils.range(1, numberOfStars).map((number) => (
-            <div  key={number} className="star" />
+            <div key={number} className="star" />
           ))}
-
-          
-
         </div>
         <div className="right">
           {utils.range(1, 9).map((buttonId) => (
@@ -178,7 +186,9 @@ const StarMatch = (props) => {
               style={{ backgroundColor: currentNumberDetails[buttonId - 1] }}
               className="number"
               value={buttonId}
-              disabled={gameStatus==="lose" || gameStatus === "win"? true:false}
+              disabled={
+                gameStatus === "lose" || gameStatus === "win" ? true : false
+              }
               onClick={(element) =>
                 handler(buttonId, currentNumberDetails[buttonId - 1])
               }
@@ -194,10 +204,10 @@ const StarMatch = (props) => {
 };
 
 const redColor = {
-  color:"red"
-}
-const greenColor ={
-  color:"green"
-}
+  color: "red",
+};
+const greenColor = {
+  color: "green",
+};
 
 export default StarMatch;
