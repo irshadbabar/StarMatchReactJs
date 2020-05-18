@@ -143,8 +143,43 @@ const StarMatch = (props) => {
   return (
     <div className="game">
       <div className="help">
-        Pick 1 or more numbers that sum to the number of stars
+      <h4>Pick 1 or more numbers that sum to the number of stars</h4>
+        
+        
       </div>
+      <div className="help">
+      <button  
+          style={{ backgroundColor: colors.used }}
+          className="number"
+          value="*"
+        >*</button>
+        Means it has been used
+        </div>
+        <div className="help">
+      <button  
+          style={{ backgroundColor: colors.available }}
+          className="number"
+          value="*"
+        >*</button>
+        Means available slot you can click on them
+        </div>
+        <div className="help">
+        <button  
+          style={{ backgroundColor: colors.candidate }}
+          className="number"
+          value="*"
+        >*</button>
+        Means it's a candidate so select others to sum
+        </div>
+        <div className="help">
+        <button  
+          style={{ backgroundColor: colors.wrong }}
+          className="number"
+          value="*"
+        >*</button>
+        Means chosen wrongly
+        </div>
+
       <div className="body">
         <div className="left">
           {gameStatus === "lose" ? (
@@ -172,8 +207,8 @@ const StarMatch = (props) => {
               </button>
             </div>
           ) : (
-                ""
-              )}
+            ""
+          )}
 
           {utils.range(1, numberOfStars).map((number) => (
             <div key={number} className="star" />
